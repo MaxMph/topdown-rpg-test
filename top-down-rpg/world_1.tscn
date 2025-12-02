@@ -1,7 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://chhlcohygqwqs"]
+[gd_scene load_steps=5 format=3 uid="uid://chhlcohygqwqs"]
 
 [ext_resource type="Texture2D" uid="uid://2hn4vtgjyq3f" path="res://36_dry grass texture-seamless.jpg" id="1_e5alk"]
 [ext_resource type="PackedScene" uid="uid://b32kohx6giyt7" path="res://addons/player_1.tscn" id="2_vigqh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vigqh"]
+size = Vector2(8000, 8000)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mqyi5"]
+size = Vector2(16000, 16000)
 
 [node name="world 1" type="Node2D"]
 
@@ -11,14 +17,25 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -4000.0
-offset_top = -4000.0
-offset_right = 4000.0
-offset_bottom = 4000.0
+offset_left = -8000.0
+offset_top = -8000.0
+offset_right = 8000.0
+offset_bottom = 8000.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 texture = ExtResource("1_e5alk")
 expand_mode = 1
 stretch_mode = 1
 
 [node name="player 1" parent="." instance=ExtResource("2_vigqh")]
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_vigqh")
+
+[node name="Area2D2" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2"]
+shape = SubResource("RectangleShape2D_mqyi5")
