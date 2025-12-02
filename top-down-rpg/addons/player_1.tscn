@@ -1,0 +1,65 @@
+[gd_scene load_steps=8 format=3 uid="uid://b32kohx6giyt7"]
+
+[ext_resource type="Script" uid="uid://dv70bypvkw4vb" path="res://addons/player_1.gd" id="1_q4xuc"]
+[ext_resource type="Shader" uid="uid://cugg0u0w8vki0" path="res://addons/player_1.gdshader" id="2_l0l5b"]
+[ext_resource type="Shader" uid="uid://c6hvbh4wcwk2h" path="res://addons/pinhole.gdshader" id="3_jkmws"]
+[ext_resource type="Texture2D" uid="uid://c3j8vc7fp52yl" path="res://Screenshot_from_2025-12-02_16-25-53-removebg-preview.png" id="4_4x838"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_q4xuc"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jkmws"]
+shader = ExtResource("2_l0l5b")
+shader_parameter/effect_amount = 2.00000021375
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4x838"]
+shader = ExtResource("3_jkmws")
+shader_parameter/radius = 0.45
+shader_parameter/softness = 0.0
+shader_parameter/overlay_color = Color(0, 0, 0, 1)
+
+[node name="player 1" type="CharacterBody2D"]
+script = ExtResource("1_q4xuc")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.2, 0.2)
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
+scale = Vector2(20, 20)
+mesh = SubResource("SphereMesh_q4xuc")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/Control"]
+material = SubResource("ShaderMaterial_jkmws")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="ColorRect2" type="ColorRect" parent="CanvasLayer/Control"]
+material = SubResource("ShaderMaterial_4x838")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="ScreenshotFrom20251202162553RemovebgPreview" type="Sprite2D" parent="."]
+position = Vector2(1, -13)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("4_4x838")
