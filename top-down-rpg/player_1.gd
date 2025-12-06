@@ -19,6 +19,12 @@ var cam_zoom
 
 func _ready() -> void:
 	cam_zoom = $Camera2D.zoom
+	#if get_parent().real:
+		#$Camera2D.make_current()
+	if global_position == Vector2.ZERO:
+		$Camera2D.make_current()
+		$Camera2D/Control.show()
+		$CanvasLayer/Control.show()
 
 func _physics_process(delta: float) -> void:
 	
@@ -35,9 +41,12 @@ func _physics_process(delta: float) -> void:
 	
 	var direction := Input.get_vector("left","right","up","down").normalized()
 	if direction != Vector2.ZERO:
-		$plane.rotation = rotate_toward($plane.rotation ,direction.angle() + deg_to_rad(90), turnspeed * delta)
+		#$plane.rotation = rotate_toward($plane.rotation ,direction.angle() + deg_to_rad(90), turnspeed * delta)
+		rotation = rotate_toward(rotation ,direction.angle() + deg_to_rad(90), turnspeed * delta)
 	
-	velocity = -SPEED * Vector2.from_angle($plane.rotation + deg_to_rad(90))
+	#velocity = -SPEED * Vector2.from_angle($plane.rotation + deg_to_rad(90))
+	velocity = -SPEED * Vector2.from_angle(rotation + deg_to_rad(90))
+	
 	#var direction := Input.get_vector("left","right","up","down").normalized()
 	#if direction != Vector2.ZERO:
 		#velocity.x = direction.x * (SPEED * sprint_mod)

@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://ct0h0l7gdwhqh"]
+
+[ext_resource type="Texture2D" uid="uid://2hn4vtgjyq3f" path="res://36_dry grass texture-seamless.jpg" id="1_aw5y0"]
+[ext_resource type="Script" uid="uid://05i3ll5ai2ce" path="res://core_world_1.gd" id="1_t70sq"]
+[ext_resource type="PackedScene" uid="uid://b32kohx6giyt7" path="res://player_1.tscn" id="2_t70sq"]
+[ext_resource type="Script" uid="uid://ddlym3fgd3dj3" path="res://bounds_1.gd" id="4_gral2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1fe7r"]
+size = Vector2(8000, 8000)
+
+[node name="core_world_1" type="Node2D"]
+script = ExtResource("1_t70sq")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -4000.0
+offset_top = -4000.0
+offset_right = 4000.0
+offset_bottom = 4000.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("1_aw5y0")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="player 1" parent="." instance=ExtResource("2_t70sq")]
+
+[node name="Area2D" type="Area2D" parent="."]
+script = ExtResource("4_gral2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_1fe7r")
+
+[connection signal="body_exited" from="Area2D" to="Area2D" method="_on_body_exited"]

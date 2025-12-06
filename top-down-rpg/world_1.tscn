@@ -1,13 +1,15 @@
-[gd_scene load_steps=5 format=3 uid="uid://chhlcohygqwqs"]
+[gd_scene load_steps=7 format=3 uid="uid://chhlcohygqwqs"]
 
 [ext_resource type="Texture2D" uid="uid://2hn4vtgjyq3f" path="res://36_dry grass texture-seamless.jpg" id="1_e5alk"]
-[ext_resource type="PackedScene" uid="uid://b32kohx6giyt7" path="res://addons/player_1.tscn" id="2_vigqh"]
+[ext_resource type="PackedScene" uid="uid://b32kohx6giyt7" path="res://player_1.tscn" id="2_vigqh"]
+[ext_resource type="Script" uid="uid://ddlym3fgd3dj3" path="res://bounds_1.gd" id="3_1wjj6"]
+[ext_resource type="Script" uid="uid://d18x8ookd2p7u" path="res://bounds_2.gd" id="4_kdx2d"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vigqh"]
 size = Vector2(8000, 8000)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mqyi5"]
-size = Vector2(16000, 16000)
+size = Vector2(24000, 24000)
 
 [node name="world 1" type="Node2D"]
 
@@ -17,10 +19,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -8000.0
-offset_top = -8000.0
-offset_right = 8000.0
-offset_bottom = 8000.0
+offset_left = -12000.0
+offset_top = -12000.0
+offset_right = 12000.0
+offset_bottom = 12000.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -30,12 +32,19 @@ stretch_mode = 1
 
 [node name="player 1" parent="." instance=ExtResource("2_vigqh")]
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="bounds1" type="Area2D" parent="."]
+script = ExtResource("3_1wjj6")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="bounds1"]
 shape = SubResource("RectangleShape2D_vigqh")
 
-[node name="Area2D2" type="Area2D" parent="."]
+[node name="bounds2" type="Area2D" parent="."]
+script = ExtResource("4_kdx2d")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="bounds2"]
 shape = SubResource("RectangleShape2D_mqyi5")
+
+[node name="chunk 0,0" type="Node2D" parent="."]
+
+[connection signal="body_exited" from="bounds1" to="bounds1" method="_on_body_exited"]
+[connection signal="body_exited" from="bounds2" to="bounds2" method="_on_body_exited"]
